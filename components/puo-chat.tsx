@@ -142,6 +142,16 @@ export function PuoChat({
         <PuoHeader 
           title="PuoAi Chat"
           rightIcon="mic"
+          onBack={() => {
+            // If in chat mode, go back to voice mode, otherwise go back to home/previous page
+            if (viewMode === 'chat') {
+              setViewMode('voice');
+            } else {
+              // You might want to use router.back() or router.push('/') here depending on your navigation structure
+              // For now, let's assume going back means returning to the home page
+              window.location.href = '/'; 
+            }
+          }}
           onRightClick={() => {
             if (viewMode === 'chat') {
               setViewMode('voice');
