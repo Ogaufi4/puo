@@ -1,13 +1,9 @@
 import { google } from '@ai-sdk/google';
-import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
-
-import { customMiddleware } from './custom-middleware';
 
 export const customModel = (apiIdentifier: string) => {
-  return wrapLanguageModel({
-    model: google(apiIdentifier),
-    middleware: customMiddleware,
-  });
+  // Note: Custom middleware is not compatible with Google's v2 models
+  // If you need middleware, you'll need to implement it differently
+  return google(apiIdentifier);
 };
 
 // Note: Gemini doesn't have image generation, you may need to keep OpenAI for this

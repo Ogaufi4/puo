@@ -78,7 +78,7 @@ export const register = async (
     console.error('Registration error:', error);
     
     if (error instanceof z.ZodError) {
-      console.error('Validation errors:', error.errors);
+      console.error('Validation errors:', error.issues);
       return { status: 'invalid_data' };
     }
 
