@@ -52,6 +52,8 @@ export function PuoChat({
     },
   });
 
+  console.log('PuoChat messages:', messages);
+
   const { data: votes } = useSWR<Array<Vote>>(
     `/api/vote?chatId=${id}`,
     fetcher,
@@ -63,12 +65,17 @@ export function PuoChat({
   const isBlockVisible = useBlockSelector((state) => state.isVisible);
 
   const handleSendMessage = (text: string) => {
+    console.log('handleSendMessage called with:', text);
     if (text.trim() && !isLoading) {
+      console.log('Appending message to chat');
       append({
         role: 'user',
         content: text,
       });
       setViewMode('chat'); // Switch to chat when sending a message
+      console.log('Switched to chat mode');
+    } else {
+      console.log('Message not sent - either empty or loading:', { text, isLoading });
     }
   };
 
@@ -226,18 +233,21 @@ export function PuoChat({
                 </div>
               )}
               
-              {messages.map((message, index) => (
-                <ChatBubble
-                  key={message.id}
-                  message={typeof message.content === 'string' ? message.content : JSON.stringify(message.content)}
-                  type={message.role === 'user' ? 'outgoing' : 'incoming'}
-                  showActions={message.role === 'assistant' && index === messages.length - 1}
-                  onCopy={() => handleCopyMessage(typeof message.content === 'string' ? message.content : '')}
-                  onLike={() => console.log('Liked message:', message.id)}
-                  onSpeak={() => handleSpeakMessage(typeof message.content === 'string' ? message.content : '')}
-                  onReply={() => setInput(`Reply to: ${typeof message.content === 'string' ? message.content.substring(0, 50) : ''}...`)}
-                />
-              ))}
+              {messages.map((message, index) => {
+                console.log('Rendering message:', { id: message.id, role: message.role, content: message.content });
+                return (
+                  <ChatBubble
+                    key={message.id}
+                    message={typeof message.content === 'string' ? message.content : JSON.stringify(message.content)}
+                    type={message.role === 'user' ? 'outgoing' : 'incoming'}
+                    showActions={message.role === 'assistant' && index === messages.length - 1}
+                    onCopy={() => handleCopyMessage(typeof message.content === 'string' ? message.content : '')}
+                    onLike={() => console.log('Liked message:', message.id)}
+                    onSpeak={() => handleSpeakMessage(typeof message.content === 'string' ? message.content : '')}
+                    onReply={() => setInput(`Reply to: ${typeof message.content === 'string' ? message.content.substring(0, 50) : ''}...`)}
+                  />
+                );
+              })}
               
               {isLoading && (
                 <ChatBubble
