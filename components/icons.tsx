@@ -763,13 +763,14 @@ export const PlusIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-export const CopyIcon = ({ size = 16 }: { size?: number }) => (
+export const CopyIcon = ({ size = 16, className }: { size?: number; className?: string }) => (
   <svg
     height={size}
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width={size}
     style={{ color: 'currentcolor' }}
+    className={className}
   >
     <path
       fillRule="evenodd"
@@ -780,13 +781,14 @@ export const CopyIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-export const ThumbUpIcon = ({ size = 16 }: { size?: number }) => (
+export const ThumbUpIcon = ({ size = 16, className }: { size?: number; className?: string }) => (
   <svg
     height={size}
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width={size}
     style={{ color: 'currentcolor' }}
+    className={className}
   >
     <path
       fillRule="evenodd"
@@ -797,13 +799,14 @@ export const ThumbUpIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
-export const ThumbDownIcon = ({ size = 16 }: { size?: number }) => (
+export const ThumbDownIcon = ({ size = 16, className }: { size?: number; className?: string }) => (
   <svg
     height={size}
     strokeLinejoin="round"
     viewBox="0 0 16 16"
     width={size}
     style={{ color: 'currentcolor' }}
+    className={className}
   >
     <path
       fillRule="evenodd"

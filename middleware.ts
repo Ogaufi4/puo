@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
 
   if (!isMobile) {
     // For web requests, let NextAuth handle it
-    return NextAuth(authConfig).auth(request);
+    return NextAuth(authConfig).auth(request as any);
   }
 
   // Mobile-specific middleware ok
